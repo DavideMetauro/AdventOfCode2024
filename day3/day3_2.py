@@ -6,8 +6,6 @@ def read_input():
     
 def find_instructions(data):
     instructions = re.findall(r'mul\(\d+,\d+\)|do\(\)|don\'t\(\)',data)
-    #values = re.findall(r'do\(\)|don\'t\(\)',data)
-
     return instructions
 
 def calculate_mul(instructions):
