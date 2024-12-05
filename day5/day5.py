@@ -22,10 +22,8 @@ def create_sets(part1):
     print(setY)
     return setX, setY
 
-def create_map(part2, setX, setY):
-    map_num_count = {}
-
 if __name__ == '__main__':
     part1, part2 = read_input()
     setX, setY = create_sets(part1)
-    create_map(part2, setX, setY)
+
+    
