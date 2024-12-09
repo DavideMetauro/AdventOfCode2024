@@ -4,7 +4,7 @@ final=[]
 
 def read_input():
     count = 0
-    with open('input9.txt', 'r') as file:
+    with open('input9_test.txt', 'r') as file:
         while True:
             c = file.read(1)
             if not c:
@@ -13,34 +13,31 @@ def read_input():
                 quantity.append(int(c))
             else:
                 clear.append(int(c))
+            #print(c, end='')
             count+=1
 
 def rearrange():
-    last_index = len(quantity)-1
-    for i in range(len(quantity)):
+    
+
+def create_final():
+    for i in range(len(quantity)-1):
         for j in range(quantity[i]):
             final.append(i)
-        quantity[i] = 0
         for j in range(clear[i]):
-            final.append(last_index)
-            quantity[last_index] -= 1
-            if quantity[last_index] == 0:
-                last_index -= 1
-            if last_index == i:
-                break
-        if last_index == i:
-            break
+            final.append(None)
+    for j in range(quantity[-1]):
+        final.append(len(quantity)-1)
+
 
 
 def check_sum():
-    sum=0
-    for i in range(len(final)):
-        sum+=final[i]*i
-    return sum
+    return sum([i*final[i] for i in range(len(final)) if final[i] is not None])
 
 if __name__ == "__main__":
     read_input()
+    create_final()
     rearrange()
+    print(final)
     print(check_sum())
 
 

@@ -47,8 +47,11 @@ def flatten_diagonally_reverse(matrix):
 
 def transpose(matrix):
     matrixT = [['' for i in range(len(matrix))] for j in range(len(matrix[0]))]
-    for i in range(len(matrix)-1):
-        for j in range(len(matrix[0])-1):
+    print(matrixT(len(matrix[0])))
+    print(len(matrix[0]))
+    print(len(matrixT[0]))
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
             matrixT[j][i] = matrix[i][j]
     return matrixT
 
