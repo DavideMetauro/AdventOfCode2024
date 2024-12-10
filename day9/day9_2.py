@@ -20,22 +20,32 @@ def rearrange():
     for i in range(len(quantity)-1, 0, -1):
         for j in range(len(clear)):
             if quantity[i] <= clear[j] and quantity[i] != 0:
-                clear_index=j*2+1
-                quantity_index=i*2
-                final[clear_index].remove(None for k in range(quantity[i]))
-                final[clear_index].insert((p for p in range(quantity[i])), i)
-                final[quantity_index].remove(i for k in range(quantity[i]))
-                final[quantity_index].insert((p for p in range(quantity[i])), None)
+                clear_index=0
+                for n in clear[0:j]:
+                    clear_index+=n 
+                for n in quantity[0:j+1]:
+                    clear_index+=n
+                quantity_index=final.index(i)
+
+                for k in range(quantity[i]):
+                    print(final[clear_index:].index(None))
+                    final.pop(final[clear_index:].index(None) + clear_index)
+                    final.insert(clear_index, i)
+                    final.pop(final[quantity_index:].index(i) + quantity_index)
+                    #final[quantity_index:].remove(i)
+                    final.insert(quantity_index, None)
+                    #final[quantity_index:].insert(0, None)
                 clear[j] -= quantity[i]
+                clear[i-1] += quantity[i]
                 quantity[i] = 0
                 break
         
 
 def create_final():
     for i in range(len(quantity)-1):
-        final.append([i for j in range(quantity[i])])
-        final.append([None for j in range(clear[i])])
-    final.append([len(quantity)-1 for j in range(quantity[-1])])
+        final.extend(i for j in range(quantity[i]))
+        final.extend(None for j in range(clear[i]))
+    final.extend(len(quantity)-1 for j in range(quantity[-1]))
 
 
 
