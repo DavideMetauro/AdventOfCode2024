@@ -17,13 +17,11 @@ def read_input():
             count+=1
 
 def rearrange():
-    last_index = len(quantity)-1
-    for i in range(len(quantity)):
-        for j in range(clear[i]):
-            final.append(last_index)
-            quantity[last_index] -= 1
-            if quantity[last_index] == 0:
-                last_index -= 1
+    for i in range(len(quantity), 0, -1):
+        for e in clear:
+            if quantity[i] <= e:
+                quantity[i] = 0
+                final.remove(i for j in range(e))
 
 def create_final():
     for i in range(len(quantity)-1):
