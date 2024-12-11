@@ -1,5 +1,5 @@
-clear=[]
-quantity=[]
+free_spaces=[]
+occupied_spaces=[]
 final=[]
 
 def read_input():
@@ -10,42 +10,29 @@ def read_input():
             if not c:
                 break
             if count%2==0:
-                quantity.append(int(c))
+                occupied_spaces.append(int(c))
             else:
-                clear.append(int(c))
-            #print(c, end='')
+                free_spaces.append(int(c))
             count+=1
 
-def rearrange():
-    for i in range(len(quantity)-1, 0, -1):
-        for j in range(len(clear)):
-            if quantity[i] <= clear[j] and quantity[i] != 0:
-                clear_index=0
-                for n in clear[0:j]:
-                    clear_index+=n 
-                for n in quantity[0:j+1]:
-                    clear_index+=n
-                quantity_index=final.index(i)
+def count_clear():
+    index=0
+    free_dict = {}
+    for i in range(len(final)):
+        if final[i] is None and final[i-1] is not None:
+            index = i
+            if index in free_dict:
+                free_dict[index] += 1
+            else:
+                free_dict[index] = 1
+            print(free_dict)
 
-                for k in range(quantity[i]):
-                    print(final[clear_index:].index(None))
-                    final.pop(final[clear_index:].index(None) + clear_index)
-                    final.insert(clear_index, i)
-                    final.pop(final[quantity_index:].index(i) + quantity_index)
-                    #final[quantity_index:].remove(i)
-                    final.insert(quantity_index, None)
-                    #final[quantity_index:].insert(0, None)
-                clear[j] -= quantity[i]
-                clear[i-1] += quantity[i]
-                quantity[i] = 0
-                break
-        
 
 def create_final():
-    for i in range(len(quantity)-1):
-        final.extend(i for j in range(quantity[i]))
-        final.extend(None for j in range(clear[i]))
-    final.extend(len(quantity)-1 for j in range(quantity[-1]))
+    for i in range(len(occupied_spaces)-1):
+        final.extend(i for j in range(occupied_spaces[i]))
+        final.extend(None for j in range(free_spaces[i]))
+    final.extend(len(occupied_spaces)-1 for j in range(occupied_spaces[-1]))
 
 
 
@@ -56,8 +43,8 @@ if __name__ == "__main__":
     read_input()
     create_final()
     print(final)
-    rearrange()
-    print(final)
-    print(check_sum())
+    count_clear()
+    #rearrange()
+    #print(check_sum())
 
 
