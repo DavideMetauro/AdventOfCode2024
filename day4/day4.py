@@ -1,11 +1,11 @@
 import re
 
 def read_input():
-    with open('input4_test.txt') as f:
+    with open('input4.txt') as f:
         return f.readlines()
 
 def listToMatrix(lines):
-    return [list(line) for line in lines]
+    return [list(line.strip()) for line in lines]
 
 def findXmas(strings):
     matches=[]
@@ -45,42 +45,33 @@ def flatten_diagonally_reverse(matrix):
         diagonals.append(''.join(diagonal))
     return diagonals
 
+'''
 def transpose(matrix):
     matrixT = [['' for i in range(len(matrix))] for j in range(len(matrix[0]))]
-    print(matrixT(len(matrix[0])))
-    print(len(matrix[0]))
-    print(len(matrixT[0]))
     for i in range(len(matrix)):
         for j in range(len(matrix[0])):
             matrixT[j][i] = matrix[i][j]
     return matrixT
-
+'''
 
 def main():
     count=0
     lines = read_input()
     matrix = listToMatrix(lines)
-    matrixT=transpose(matrix)
-
-    #print(matrix)
-    #print(matrixT)
+    #matrixT=transpose(matrix)
 
     count+=len(findXmas(lines))
-    #print(findXmas(lines))
-    print(count)
 
-    column_strings = [''.join(row) for row in zip(*matrixT)]
-    #print(column_strings)
+    #transposed matrix
+    column_strings = [''.join(row) for row in zip(*matrix)]
     count+=len(findXmas(column_strings))
-    print(count)
     
+    #from right to left
     diagonal_strings = flatten_diagonally(matrix)
-    print(diagonal_strings)
     count += len(findXmas(diagonal_strings))
-    print(count)
 
+    #from left to right
     diagonal_reverse = flatten_diagonally_reverse(matrix)
-    print(diagonal_reverse)
     count += len(findXmas(diagonal_reverse))
     print(count)
     
