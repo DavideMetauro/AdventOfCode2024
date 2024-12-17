@@ -10,15 +10,9 @@ def listToMatrix(lines):
 def findXmas(strings):
     matches=[]
     for line in strings:
-        match = re.findall(r'XMAS', line)
-        if match:
-            for m in match:
-               matches.append(m)
+        matches.extend(re.findall(r'XMAS', line))
     for line in strings:
-        match = re.findall(r'SAMX', line)
-        if match:
-            for m in match:
-               matches.append(m)
+        matches.extend(re.findall(r'SAMX', line))
     return matches
 
 def flatten_diagonally(matrix):
