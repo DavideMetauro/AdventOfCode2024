@@ -16,7 +16,7 @@ def create_comparison(part1):
             comparison[num1] = []
         comparison[num1].append(num2)
 
-#return true if num1 is bigger (printed before) than num2. Default is false (num1 is smaller than num2)
+#return 1 if num1 is bigger (printed before) than num2.
 def compare(num1, num2):
     if num1 == num2 :
         return 0
