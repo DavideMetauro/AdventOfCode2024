@@ -18,6 +18,12 @@ def create_comparison(part1):
         comparison[num1].append(num2)
     return comparison
 
+#return true if num1 is bigger than num2. Default is false (num1 is smaller than num2)
+def compare(comparison, num1, num2):
+    if num1 not in comparison:
+        return False
+    return True if num2 in comparison[num1] else False
+
 '''
 def create_sets(part1):
     setX = set()
