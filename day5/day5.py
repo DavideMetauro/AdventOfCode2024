@@ -9,6 +9,16 @@ def read_input():
         part2 = input_data[1].strip().split(',')
     return part1, part2
 
+def create_comparison(part1):
+    comparison = {}
+    for pair in part1:
+        num1, num2 = map(int, pair.split('|'))
+        if num1 not in comparison:
+            comparison[num1] = []
+        comparison[num1].append(num2)
+    return comparison
+
+'''
 def create_sets(part1):
     setX = set()
     setY = set()
@@ -21,9 +31,10 @@ def create_sets(part1):
     print(setX)
     print(setY)
     return setX, setY
+'''
 
 if __name__ == '__main__':
     part1, part2 = read_input()
-    setX, setY = create_sets(part1)
+    print(create_comparison(part1))
 
     
