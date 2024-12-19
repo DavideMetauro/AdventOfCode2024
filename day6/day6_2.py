@@ -31,15 +31,33 @@ def move(x, y, direction):
         return None, None, None
     
 def main():
+    count_loop = 0
     lines = read_input()
+    set_of_visited = set()
     global matrix
     matrix = [list(line.strip()) for line in lines]
-    x, y, dir = find_start(matrix)
-    matrix[x][y] = 'X'
-    while x is not None or y is not None or dir is not None:
-        x,y,dir=move(x, y, dir)
-    count_x = sum(line.count('X') for line in matrix)
-    print(f"Total X count: {count_x}")
+    x_start, y_start, dir_start = find_start(matrix)
+    matrix[x_start][y_start] = 'X'
+    for i in range(len(matrix)) :
+        for j in range(len(matrix[0])) :
+            if matrix[i][j] == '#':
+                continue
+            if i == x_start and j == y_start:
+                continue
+            set_of_visited.clear()
+            e_old = matrix[i][j]
+            matrix[i][j]='#' 
+            x, y, dir = x_start, y_start, dir_start
+            while x is not None or y is not None or dir is not None:
+                x,y,dir=move(x, y, dir)
+                if (x, y, dir) in set_of_visited:
+                    count_loop += 1
+                    break
+                else:
+                    set_of_visited.add((x, y, dir))
+            matrix[i][j]=e_old
+            #print(len(set_of_visited))
+    print(count_loop)
 
 if __name__ == "__main__":
     main()
