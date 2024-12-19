@@ -1,3 +1,5 @@
+import time
+
 directions = ['^', '>', 'v', '<']
 matrix=[]
 def read_input():
@@ -60,4 +62,6 @@ def main():
     print(count_loop)
 
 if __name__ == "__main__":
+    start_time = time.time()
     main()
+    print("--- %s seconds ---" % (time.time() - start_time))
